@@ -1,6 +1,6 @@
 @tool
 
-class_name HealthBar3D extends Node3D
+class_name ProgressBar3D extends Node3D
 
 
 @onready var percent_full: float
