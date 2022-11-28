@@ -3,7 +3,7 @@
 class_name ProgressBar3D extends Node3D
 
 
-@onready var percent_full: float
+var percent_full: float
 @onready var origin: Node3D
 @onready var under: MeshInstance3D
 @onready var progress: MeshInstance3D
