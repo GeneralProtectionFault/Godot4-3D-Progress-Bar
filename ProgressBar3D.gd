@@ -9,7 +9,6 @@ var percent_full: float
 @onready var progress: MeshInstance3D
 
 
-
 func _init():
 	origin = Node3D.new()
 	under = MeshInstance3D.new()
@@ -139,7 +138,10 @@ func _init():
 				progress.material_override.shading_mode = shaded
 
 
-
+@export var keep_size_regardless_of_zoom = false:
+	set(val):
+		keep_size_regardless_of_zoom = val
+		set_mesh_sizes()	
 
 
 
@@ -149,6 +151,15 @@ func set_percent_full():
 
 
 func set_mesh_sizes():
+	# Zoom compensator!
+	if (keep_size_regardless_of_zoom):
+		progress.material_override.fixed_size = true
+		under.material_override.fixed_size = true
+	else:
+		progress.material_override.fixed_size = false
+		under.material_override.fixed_size = false
+
+
 	var outline_offset: float = max(outline_size, .01)
 	var x_size_offset = size.x * percent_full
 
@@ -164,6 +175,9 @@ func set_mesh_sizes():
 		under.mesh.size.y = size.y + outline_offset
 		under.mesh.size.z = size.z - outline_offset
 		under.mesh.size.x = size.x
+
+	
+
 
 
 
