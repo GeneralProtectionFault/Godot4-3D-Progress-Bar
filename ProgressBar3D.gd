@@ -185,4 +185,4 @@ func set_under_color():
 	under.material_override.albedo_color = outline_color
 
 func set_progress_color():
-	progress.material_override.albedo_color = empty_color.lerp(full_color, value)
+	progress.material_override.albedo_color = empty_color.lerp(full_color, percent_full)
