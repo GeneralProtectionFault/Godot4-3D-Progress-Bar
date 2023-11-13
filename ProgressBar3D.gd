@@ -97,45 +97,31 @@ func _init():
 	set(val):
 		keep_empty_bar = val
 		set_mesh_sizes()
+		
 
 
-@export_enum("Disabled", "Enabled", "Y-Billboard") var billboard = 1:
+@export_enum("OFF", "ON", "DOUBLE_SIDED", "SHADOWS_ONLY") var cast_shadows:
 	set(val):
-		match val:
-			0:
-				billboard = StandardMaterial3D.BILLBOARD_DISABLED
-				under.material_override.billboard_mode = billboard
-				progress.material_override.billboard_mode = billboard
-			1:
-				billboard = StandardMaterial3D.BILLBOARD_ENABLED
-				under.material_override.billboard_mode = billboard
-				progress.material_override.billboard_mode = billboard
-			2:
-				billboard = StandardMaterial3D.BILLBOARD_FIXED_Y
-				under.material_override.billboard_mode = billboard
-				progress.material_override.billboard_mode = billboard
+		cast_shadows = val
+		under.cast_shadow = val
+		progress.cast_shadow = val
 
 
 
-@export_enum("Disabled", "Per Pixel", "Per Vertex", "Max") var shaded = 0:
+@export_enum("DISABLED", "ENABLED", "FIXED_Y", "PARTICLES", "MAX") var billboard = 1:
 	set(val):
-		match val:
-			0:
-				shaded = BaseMaterial3D.SHADING_MODE_UNSHADED
-				under.material_override.shading_mode = shaded
-				progress.material_override.shading_mode = shaded
-			1:
-				shaded = BaseMaterial3D.SHADING_MODE_PER_PIXEL
-				under.material_override.shading_mode = shaded
-				progress.material_override.shading_mode = shaded
-			2:
-				shaded = BaseMaterial3D.SHADING_MODE_PER_VERTEX
-				under.material_override.shading_mode = shaded
-				progress.material_override.shading_mode = shaded
-			3:
-				shaded = BaseMaterial3D.SHADING_MODE_MAX
-				under.material_override.shading_mode = shaded
-				progress.material_override.shading_mode = shaded
+		billboard = val
+		under.material_override.billboard_mode = val
+		progress.material_override.billboard_mode = val
+
+
+
+@export_enum("UNSHADED", "PER_PIXEL", "PER_VERTEX", "MAX") var shaded = 0:
+	set(val):
+		shaded = val
+		under.material_override.shading_mode = val
+		progress.material_override.shading_mode = val
+		
 
 
 @export var keep_size_regardless_of_zoom = false:
@@ -177,9 +163,6 @@ func set_mesh_sizes():
 		under.mesh.size.x = size.x
 
 	
-
-
-
 
 func set_under_color():
 	under.material_override.albedo_color = outline_color
